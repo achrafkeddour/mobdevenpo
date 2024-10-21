@@ -1,0 +1,28 @@
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LinearLayout monLinearLayout = new LinearLayout(this);
+        monLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        TextView monTextView1 = new TextView(this);
+        TextView monTextView2 = new TextView(this);
+        monLinearLayout.addView(monTextView1);
+        monLinearLayout.addView(monTextView2);
+        setContentView(monLinearLayout);
+        monTextView1.setText("Bonjour tout le monde !");
+        monTextView2.setText("Ceci est mon 2eme texte");
+    }
+}
