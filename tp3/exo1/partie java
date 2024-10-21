@@ -1,0 +1,84 @@
+package com.example.exo1tp3;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText number1, number2;
+    private RadioGroup operations;
+    private TextView result;
+    private Button valider, raz, quit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Associer les éléments XML aux objets Java
+        number1 = findViewById(R.id.editText1);
+        number2 = findViewById(R.id.editText2);
+        operations = findViewById(R.id.radioGroup);
+        result = findViewById(R.id.result);  // Associer le TextView au résultat
+
+        // Boutons
+        valider = findViewById(R.id.val);
+        raz = findViewById(R.id.raz);
+        quit = findViewById(R.id.quit);
+
+        // Associer des actions aux boutons
+        valider.setOnClickListener(this::calculate);
+        raz.setOnClickListener(this::clearFields);
+        quit.setOnClickListener(this::quitApp);
+    }
+
+    public void calculate(View view) {
+        String num1Str = number1.getText().toString();
+        String num2Str = number2.getText().toString();
+
+        if (num1Str.isEmpty() || num2Str.isEmpty()) {
+            result.setText("Veuillez entrer les deux valeurs");
+            return;
+        }
+
+        double num1 = Double.parseDouble(num1Str);
+        double num2 = Double.parseDouble(num2Str);
+        double res = 0;
+
+        int selectedOperation = operations.getCheckedRadioButtonId();
+        if (selectedOperation == R.id.radioButton1) { // Somme
+            res = num1 + num2;
+        } else if (selectedOperation == R.id.radioButton2) { // Soustraction
+            res = num1 - num2;
+        } else if (selectedOperation == R.id.radioButton3) { // Multiplication
+            res = num1 * num2;
+        } else if (selectedOperation == R.id.radioButton4) { // Division
+            if (num2 != 0) {
+                res = num1 / num2;
+            } else {
+                result.setText("Division par zéro impossible");
+                return;
+            }
+        }
+
+        // Afficher le résultat dans le TextView
+        result.setText("Résultat: " + res);
+    }
+
+    public void clearFields(View view) {
+        number1.setText("");
+        number2.setText("");
+        result.setText("");
+        operations.clearCheck();
+    }
+
+    public void quitApp(View view) {
+        finish();
+    }
+}
