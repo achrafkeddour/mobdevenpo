@@ -1,3 +1,6 @@
+- l'activité représente un écran de l'application 
+- à l'intérieur de l'activité on a des layouts (comme linearlayout) pour contenir et organiser les vues 
+
 Un LinearLayout peut contenir tous types de Views, y compris :
 
 1. TextView - pour afficher du texte.
